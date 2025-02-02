@@ -80,7 +80,6 @@ jobs:
           echo "kubeconfig=${{ steps.k3s.outputs.kubeconfig }}"
           echo "k3s-version=${{ steps.k3s.outputs.k3s-version }}"
           echo "k8s-version=${{ steps.k3s.outputs.k8s-version }}"
-          echo "calico-version=${{ steps.k3s.outputs.calico-version }}"
           echo "helm-version=${{ steps.k3s.outputs.helm-version }}"
           echo "---"
 
@@ -99,10 +98,6 @@ jobs:
           fi
           if [[ "${{ steps.k3s.outputs.k8s-version }}" != v* ]]; then
               echo "k8s-version not set correctly as an action output"
-              EXIT=1
-          fi
-          if [[ "${{ steps.k3s.outputs.calico-version }}" != v* ]]; then
-              echo "calico-version not set correctly as an action output"
               EXIT=1
           fi
           if [[ "${{ steps.k3s.outputs.helm-version }}" != v* ]]; then
@@ -185,8 +180,6 @@ jobs:
         with:
           namespace: kube-system
           important-workloads: >
-            ds/calico-node
-            deploy/calico-kube-controllers
             deploy/metrics-server
             deploy/traefik
 

@@ -1,11 +1,10 @@
-# GitHub Action: Install K3s, Calico and Helm
+# GitHub Action: Install K3 and Helm
 
 [![GitHub Action badge](https://github.com/jupyterhub/action-k3s-helm/workflows/Test/badge.svg)](https://github.com/jupyterhub/action-k3s-helm/actions)
 
-Creates a Kubernetes cluster using [K3s](https://k3s.io/) (1.24+) with
-[Calico](https://www.projectcalico.org/) (3.27.0) for
-[NetworkPolicy](https://kubernetes.io/docs/concepts/services-networking/network-policies/)
-enforcement, and installs [Helm 3](https://helm.sh/) (3.5+).
+Creates a Kubernetes cluster using [K3s](https://k3s.io/) (1.24+) and installs [Helm 3](https://helm.sh/) (3.5+).
+
+Older versions of this action installed [Calico](https://www.projectcalico.org/) but this was removed in version 5.0.0 since all supported versions of K3s include full [NetworkPolicy](https://kubernetes.io/docs/concepts/services-networking/network-policies/) support.
 
 ## Optional input parameters
 
@@ -22,7 +21,6 @@ enforcement, and installs [Helm 3](https://helm.sh/) (3.5+).
   The `KUBECONFIG` environment variable is also set by this action but may be removed in a future breaking release.
 - `k3s-version`: Installed k3s version, such as v1.29.0+k3s1
 - `k8s-version`: Installed k8s version, such as v1.29.0
-- `calico-version`: Installed calico version, such as v3.27.0
 - `helm-version`: Installed helm version, such as v3.13.0
 
 ## Example
@@ -69,9 +67,8 @@ This action aims to to provide an easy to use Kubernetes cluster with the follow
 
 - K3s
 - Helm 3+
-- Calico network provider that supports network policies
 
 A small number of features are configurable.
-All K3s defaults are kept except where they conflict with the deployment of Calico.
+Most K3s defaults are kept.
 Due to the difficulty in comprehensively testing this action the aim is to minimise the number of arguments.
 If you have an advanced use case hopefully `extra-setup-args` will be sufficient.
